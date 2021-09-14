@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import java.net.InetSocketAddress
 
 // https://ktor.io/docs/servers-raw-sockets.html#client
-object SimpleEchoServer {
+object ControlMediaServer {
     private var serverInit: Boolean = false
 
     @DelicateCoroutinesApi

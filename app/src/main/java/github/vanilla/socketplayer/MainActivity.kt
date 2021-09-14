@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 if (cm.isActiveNetworkMetered) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
-                Thread { SimpleEchoServer.run(this@MainActivity, binding) }.start()
+                Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()
 
                 runOnUiThread {
                     binding.networkInfo.text = """
