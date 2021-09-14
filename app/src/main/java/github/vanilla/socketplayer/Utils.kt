@@ -1,5 +1,6 @@
 package github.vanilla.socketplayer
 
+import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import com.google.common.primitives.Ints
 import io.ktor.utils.io.bits.*
@@ -13,5 +14,10 @@ object Utils {
         // toUInt().toInt() can also do that, but it too lengthy : (
         val bytes = Ints.toByteArray(wm.connectionInfo.ipAddress.reverseByteOrder())
         return InetAddress.getByAddress(bytes)
+    }
+
+    fun isCellar(cm: ConnectivityManager): Boolean {
+        // https://developer.android.com/training/monitoring-device-state/connectivity-status-type
+        return cm.isActiveNetworkMetered
     }
 }

@@ -35,9 +35,8 @@ class MainActivity : AppCompatActivity() {
                 val wm = getSystemService(Context.WIFI_SERVICE) as WifiManager
                 val address = Utils.getIpAddress(wm)
 
-                // https://developer.android.com/training/monitoring-device-state/connectivity-status-type
                 val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                if (cm.isActiveNetworkMetered) return
+                if (Utils.isCellar(cm)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()
