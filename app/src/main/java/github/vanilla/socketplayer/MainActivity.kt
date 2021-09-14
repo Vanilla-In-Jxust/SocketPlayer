@@ -1,7 +1,6 @@
 package github.vanilla.socketplayer
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.wifi.WifiManager
@@ -30,11 +29,8 @@ class MainActivity : AppCompatActivity() {
         connectivityManager.registerDefaultNetworkCallback(object :
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                val wm = getSystemService(Context.WIFI_SERVICE) as WifiManager
-                val address = Utils.getIpAddress(wm)
-
-                val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                if (Utils.isCellar(cm)) return
+                val address = Utils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
+                if (Utils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()
