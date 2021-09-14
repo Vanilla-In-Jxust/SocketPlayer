@@ -45,13 +45,7 @@ class MainActivity : AppCompatActivity() {
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()
-
-                runOnUiThread {
-                    binding.networkInfo.text = """
-                    Run command and type sth:
-                    telnet ${address.hostAddress} 2323
-                """.trimIndent()
-                }
+                runOnUiThread { binding.networkInfo.text = "telnet ${address.hostAddress} 2323" }
             }
 
             override fun onLost(network: Network) {
