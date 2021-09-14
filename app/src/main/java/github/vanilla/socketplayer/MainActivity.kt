@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.google.common.primitives.Ints
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // https://developer.android.com/training/scheduling/wakelock#screen
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
         // https://developer.android.com/training/basics/network-ops/reading-network-state#instantaneous
         val connectivityManager = getSystemService(ConnectivityManager::class.java)
