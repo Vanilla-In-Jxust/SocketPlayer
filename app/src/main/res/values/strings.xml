@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SocketPlayer</string>
+    <string name="connect_wifi">Connect Wifi to enable socket.</string>
 </resources>
