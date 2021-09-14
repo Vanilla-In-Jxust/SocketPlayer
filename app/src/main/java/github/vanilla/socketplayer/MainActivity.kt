@@ -9,8 +9,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.common.primitives.Ints
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
+import kotlinx.coroutines.*
 import java.net.InetAddress
 
+@DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
     // https://developer.android.com/topic/libraries/view-binding#activities
     private lateinit var binding: ActivityMainBinding
@@ -37,7 +39,15 @@ class MainActivity : AppCompatActivity() {
                 val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 if (cm.isActiveNetworkMetered) return
 
-                runOnUiThread { binding.networkInfo.text = "Ip Address: ${address.hostAddress}" }
+                // https://www.kotlincn.net/docs/reference/coroutines/basics.html
+                Thread { SimpleEchoServer.run(this@MainActivity, binding) }.start()
+
+                runOnUiThread {
+                    binding.networkInfo.text = """
+                    Run command and type sth:
+                    telnet ${address.hostAddress} 2323
+                """.trimIndent()
+                }
             }
 
             override fun onLost(network: Network) {
