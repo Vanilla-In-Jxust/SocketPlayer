@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.google.common.primitives.Ints
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
+import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
 import java.net.InetAddress
 
@@ -35,8 +36,11 @@ class MainActivity : AppCompatActivity() {
             override fun onAvailable(network: Network) {
                 val wm = getSystemService(Context.WIFI_SERVICE) as WifiManager
 
+                @Suppress("SpellCheckingInspection")
                 // https://stackoverflow.com/questions/1957637/java-convert-int-to-inetaddress
-                val bytes = Ints.toByteArray(wm.connectionInfo.ipAddress)
+                // @Billchenchina: Ip address is unsigned int.
+                // toUInt().toInt() can also do that, but it too lengthy : (
+                val bytes = Ints.toByteArray(wm.connectionInfo.ipAddress.reverseByteOrder())
                 val address = InetAddress.getByAddress(bytes)
 
                 // https://developer.android.com/training/monitoring-device-state/connectivity-status-type
