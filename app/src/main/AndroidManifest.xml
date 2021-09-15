@@ -23,7 +23,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PlayerActivity" />
+        <!-- https://stackoverflow.com/questions/2591036/how-to-hide-the-title-bar-for-an-activity-in-xml-with-existing-custom-theme?page=1&tab=votes#tab-top -->
+        <activity
+            android:name=".PlayerActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>
