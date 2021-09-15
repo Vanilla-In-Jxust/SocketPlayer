@@ -21,7 +21,7 @@ class PlayerActivity : Activity() {
         setContentView(viewBinding.root)
 
         UiUtils.setScreenOn(this)
-        UiUtils.hideNavBar(this)
+        // UiUtils.hideNavBar(this)
 
         // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
         if (!ResUtils.checkResIdValid(resId, this)) finish()
