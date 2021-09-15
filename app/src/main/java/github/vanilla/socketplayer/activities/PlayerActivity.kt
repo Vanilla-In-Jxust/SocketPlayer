@@ -1,4 +1,4 @@
-package github.vanilla.socketplayer
+package github.vanilla.socketplayer.activities
 
 import android.app.Activity
 import android.os.Bundle

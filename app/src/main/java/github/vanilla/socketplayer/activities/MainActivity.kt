@@ -1,4 +1,4 @@
-package github.vanilla.socketplayer
+package github.vanilla.socketplayer.activities
 
 import android.annotation.SuppressLint
 import android.net.ConnectivityManager
@@ -6,6 +6,7 @@ import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import github.vanilla.socketplayer.ControlMediaServer
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.UiUtils
 import github.vanilla.socketplayer.utils.Utils

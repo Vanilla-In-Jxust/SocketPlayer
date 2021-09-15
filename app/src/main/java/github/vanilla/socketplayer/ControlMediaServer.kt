@@ -2,6 +2,8 @@ package github.vanilla.socketplayer
 
 import android.content.Intent
 import android.widget.Toast
+import github.vanilla.socketplayer.activities.MainActivity
+import github.vanilla.socketplayer.activities.PlayerActivity
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.ResUtils
 import io.ktor.network.selector.*

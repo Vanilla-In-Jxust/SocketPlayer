@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocketPlayer">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
 
         <!-- https://stackoverflow.com/questions/2591036/how-to-hide-the-title-bar-for-an-activity-in-xml-with-existing-custom-theme?page=1&tab=votes#tab-top -->
         <activity
-            android:name=".PlayerActivity"
+            android:name=".activities.PlayerActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
