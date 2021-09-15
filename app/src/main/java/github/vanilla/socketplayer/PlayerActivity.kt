@@ -27,14 +27,12 @@ class PlayerActivity : AppCompatActivity() {
 
         // initializePlayer()
         player = SimpleExoPlayer.Builder(this).build()
-            .also { exoPlayer -> viewBinding.videoView.player = exoPlayer }
-            .also { exoPlayer ->
-                val resUri = ResUtils.getUriInRaw(resId, this)
-                exoPlayer.setMediaItem(MediaItem.fromUri(resUri))
-            }.also { exoPlayer ->
-                exoPlayer.playWhenReady = playWhenReady
-                exoPlayer.seekTo(currentWindow, playbackPosition)
-                exoPlayer.prepare()
+            .also { viewBinding.videoView.player = it }
+            .also { it.setMediaItem(MediaItem.fromUri(ResUtils.getUriInRaw(resId, this))) }
+            .apply {
+                playWhenReady = playWhenReady
+                seekTo(currentWindow, playbackPosition)
+                prepare()
             }
     }
 
