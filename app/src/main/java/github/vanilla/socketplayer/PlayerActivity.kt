@@ -17,7 +17,9 @@ class PlayerActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
-        Utils.setScreenOn(this)
+
+        UiUtils.setScreenOn(this)
+        UiUtils.hideNavBar(this)
 
         // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
         if (!ResUtils.checkResIdValid(resId, this)) finish()

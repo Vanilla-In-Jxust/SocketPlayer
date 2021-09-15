@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        Utils.setScreenOn(this)
+
+        UiUtils.setScreenOn(this)
 
         // https://developer.android.com/training/basics/network-ops/reading-network-state#instantaneous
         val connectivityManager = getSystemService(ConnectivityManager::class.java)
