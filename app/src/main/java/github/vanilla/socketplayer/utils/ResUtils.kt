@@ -1,4 +1,4 @@
-package github.vanilla.socketplayer
+package github.vanilla.socketplayer.utils
 
 import android.app.Activity
 import android.net.Uri

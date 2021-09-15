@@ -7,6 +7,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import github.vanilla.socketplayer.databinding.ActivityPlayerBinding
+import github.vanilla.socketplayer.utils.ResUtils
+import github.vanilla.socketplayer.utils.UiUtils
 
 class PlayerActivity : Activity() {
     private val viewBinding by lazy(LazyThreadSafetyMode.NONE) {

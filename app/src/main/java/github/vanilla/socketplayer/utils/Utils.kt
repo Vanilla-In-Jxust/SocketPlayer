@@ -1,4 +1,4 @@
-package github.vanilla.socketplayer
+package github.vanilla.socketplayer.utils
 
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager

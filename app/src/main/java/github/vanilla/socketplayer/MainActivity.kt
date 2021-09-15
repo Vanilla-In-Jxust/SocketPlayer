@@ -7,6 +7,8 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
+import github.vanilla.socketplayer.utils.UiUtils
+import github.vanilla.socketplayer.utils.Utils
 import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
 
