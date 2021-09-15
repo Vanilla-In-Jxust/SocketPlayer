@@ -43,13 +43,12 @@ class PlayerActivity : AppCompatActivity() {
                 setMediaItem(MediaItem.fromUri(ResUtils.getUriInRaw(resId, outerThis)))
             }
             .apply {
-                playWhenReady = playWhenReady
+                playWhenReady = true
                 seekTo(currentWindow, playbackPosition)
                 prepare()
             }
     }
 
-    private var playWhenReady = true
     private var currentWindow = 0
     private var playbackPosition = 0L
     override fun onStop() {
@@ -59,7 +58,7 @@ class PlayerActivity : AppCompatActivity() {
         player?.run {
             playbackPosition = this.currentPosition
             currentWindow = this.currentWindowIndex
-            playWhenReady = this.playWhenReady
+            playWhenReady = true
             release()
         }
 
