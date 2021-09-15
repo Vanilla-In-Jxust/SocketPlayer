@@ -30,6 +30,7 @@ class PlayerActivity : AppCompatActivity() {
         // initializePlayer()
         player = SimpleExoPlayer.Builder(this).build()
             .also { viewBinding.videoView.player = it }
+
             // https://stackoverflow.com/questions/27351784/how-to-implement-oncompletionlistener-to-detect-end-of-media-file-in-exoplayer
             .apply {
                 addListener(object : Player.Listener {
@@ -54,14 +55,7 @@ class PlayerActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        // releasePlayer()
-        player?.run {
-            playbackPosition = this.currentPosition
-            currentWindow = this.currentWindowIndex
-            playWhenReady = true
-            release()
-        }
-
+        player?.release()
         player = null
     }
 }
