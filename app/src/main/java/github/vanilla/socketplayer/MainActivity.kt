@@ -13,14 +13,15 @@ import kotlinx.coroutines.*
 @DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
     // https://developer.android.com/topic/libraries/view-binding#activities
-    private lateinit var binding: ActivityMainBinding
+    // https://developer.android.com/codelabs/exoplayer-intro#2
+    private val binding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         Utils.setScreenOn(this)
 
         // https://developer.android.com/training/basics/network-ops/reading-network-state#instantaneous
