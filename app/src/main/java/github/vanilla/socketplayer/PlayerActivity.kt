@@ -52,6 +52,13 @@ class PlayerActivity : Activity() {
             }
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        this.onStop()
+        this.finish()
+    }
+
     private var currentWindow = 0
     private var playbackPosition = 0L
     override fun onStop() {
