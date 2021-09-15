@@ -2,7 +2,9 @@ package github.vanilla.socketplayer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import github.vanilla.socketplayer.databinding.ActivityPlayerBinding
 
@@ -28,7 +30,18 @@ class PlayerActivity : AppCompatActivity() {
         // initializePlayer()
         player = SimpleExoPlayer.Builder(this).build()
             .also { viewBinding.videoView.player = it }
-            .also { it.setMediaItem(MediaItem.fromUri(ResUtils.getUriInRaw(resId, this))) }
+            // https://stackoverflow.com/questions/27351784/how-to-implement-oncompletionlistener-to-detect-end-of-media-file-in-exoplayer
+            .apply {
+                addListener(object : Player.Listener {
+                    override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                        if (playbackState == ExoPlayer.STATE_ENDED) this@PlayerActivity.finish()
+                    }
+                })
+            }
+            .apply {
+                val outerThis = this@PlayerActivity
+                setMediaItem(MediaItem.fromUri(ResUtils.getUriInRaw(resId, outerThis)))
+            }
             .apply {
                 playWhenReady = playWhenReady
                 seekTo(currentWindow, playbackPosition)
