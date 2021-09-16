@@ -2,12 +2,13 @@ package github.vanilla.socketplayer.activities
 
 import android.app.Activity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import github.vanilla.socketplayer.databinding.ActivityPlayerBinding
-import github.vanilla.socketplayer.utils.ResUtils
+import github.vanilla.socketplayer.utils.ResUtils.getUriInRaw
 import github.vanilla.socketplayer.utils.UiUtils
 
 class PlayerActivity : Activity() {
@@ -15,16 +16,19 @@ class PlayerActivity : Activity() {
         ActivityPlayerBinding.inflate(layoutInflater)
     }
 
-    private val resId by lazy { intent.getIntExtra("resId", 0) }
+    private val fileName by lazy { intent.getStringExtra("fileName") }
     override fun onCreate(savedInstanceState: Bundle?) {
+        kotlin.runCatching { getUriInRaw(fileName, this) }.onFailure {
+            Toast.makeText(this, "Video $fileName not found", Toast.LENGTH_SHORT).show()
+            // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
+            this.finish()
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(viewBinding.root)
 
         UiUtils.setScreenOn(this)
         // UiUtils.hideNavBar(this)
-
-        // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
-        if (!ResUtils.checkResIdValid(resId, this)) finish()
     }
 
     private var player: SimpleExoPlayer? = null
@@ -34,19 +38,15 @@ class PlayerActivity : Activity() {
         // initializePlayer()
         player = SimpleExoPlayer.Builder(this).build()
             .also { viewBinding.videoView.player = it }
-
             // https://stackoverflow.com/questions/27351784/how-to-implement-oncompletionlistener-to-detect-end-of-media-file-in-exoplayer
-            .apply {
+            .apply { // this@activity.finish() after finish playing.
                 addListener(object : Player.Listener {
                     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                         if (playbackState == ExoPlayer.STATE_ENDED) this@PlayerActivity.finish()
                     }
                 })
             }
-            .apply {
-                val outerThis = this@PlayerActivity
-                setMediaItem(MediaItem.fromUri(ResUtils.getUriInRaw(resId, outerThis)))
-            }
+            .apply { setMediaItem(fromUri(getUriInRaw(fileName, this@PlayerActivity))) }
             .apply {
                 playWhenReady = true
                 seekTo(currentWindow, playbackPosition)

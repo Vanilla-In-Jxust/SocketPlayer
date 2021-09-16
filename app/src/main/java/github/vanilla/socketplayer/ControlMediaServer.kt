@@ -1,11 +1,9 @@
 package github.vanilla.socketplayer
 
 import android.content.Intent
-import android.widget.Toast
 import github.vanilla.socketplayer.activities.MainActivity
 import github.vanilla.socketplayer.activities.PlayerActivity
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
-import github.vanilla.socketplayer.utils.ResUtils
 import io.ktor.network.selector.*
 import io.ktor.network.sockets.*
 import io.ktor.utils.io.*
@@ -35,19 +33,11 @@ object ControlMediaServer {
                 try {
                     while (true) {
                         val line = input.readUTF8Line()
-                        val resId = ResUtils.getRawResId(line.orEmpty(), activity)
 
-                        if (!ResUtils.checkResIdValid(resId, activity)) {
-                            val toastText = "File: ${line}.mp4 not found. "
-                            activity.runOnUiThread {
-                                Toast.makeText(activity, toastText, Toast.LENGTH_LONG).show()
-                            }
-                        } else {
-                            // https://developer.android.com/training/basics/firstapp/starting-activity#BuildIntent
-                            val intent = Intent(activity, PlayerActivity::class.java)
-                            intent.putExtra("resId", resId)
-                            activity.runOnUiThread { activity.startActivity(intent) }
-                        }
+                        // https://developer.android.com/training/basics/firstapp/starting-activity#BuildIntent
+                        val intent = Intent(activity, PlayerActivity::class.java)
+                        intent.putExtra("fileName", line)
+                        activity.runOnUiThread { activity.startActivity(intent) }
                     }
                 } catch (ignored: Throwable) {
                 }
