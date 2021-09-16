@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import github.vanilla.socketplayer.ControlMediaServer
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.UiUtils
-import github.vanilla.socketplayer.utils.Utils
+import github.vanilla.socketplayer.utils.NetworkUtils
 import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
 
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         connectivityManager.registerDefaultNetworkCallback(object :
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                val address = Utils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
-                if (Utils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
+                val address = NetworkUtils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
+                if (NetworkUtils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()

@@ -6,7 +6,7 @@ import com.google.common.primitives.Ints
 import io.ktor.utils.io.bits.*
 import java.net.InetAddress
 
-object Utils {
+object NetworkUtils {
     fun getIpAddress(wm: WifiManager): InetAddress {
         @Suppress("SpellCheckingInspection")
         // https://stackoverflow.com/questions/1957637/java-convert-int-to-inetaddress
