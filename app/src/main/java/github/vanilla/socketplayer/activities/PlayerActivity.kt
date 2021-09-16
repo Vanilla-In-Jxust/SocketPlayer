@@ -19,7 +19,7 @@ class PlayerActivity : Activity() {
     private val fileName by lazy { intent.getStringExtra("fileName") }
     override fun onCreate(savedInstanceState: Bundle?) {
         kotlin.runCatching { getUriInRaw(fileName, this) }.onFailure {
-            Toast.makeText(this, "Video $fileName not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
             this.finish()
         }
