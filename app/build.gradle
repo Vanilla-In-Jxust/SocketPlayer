@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+
+    // https://github.com/ben-manes/gradle-versions-plugin#plugins-block
+    id "com.github.ben-manes.versions" version "0.39.0"
 }
 
 android {
@@ -46,7 +49,7 @@ dependencies {
     implementation("io.ktor:ktor-network:1.6.3")
 
     // https://developer.android.com/kotlin/coroutines?hl=zh-cn#dependency
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
     // https://github.com/google/ExoPlayer#1-add-exoplayer-module-dependencies
     implementation 'com.google.android.exoplayer:exoplayer-core:2.15.0'
