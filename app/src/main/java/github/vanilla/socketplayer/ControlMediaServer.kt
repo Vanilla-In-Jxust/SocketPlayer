@@ -35,9 +35,10 @@ object ControlMediaServer {
                         val line = input.readUTF8Line()
 
                         // https://developer.android.com/training/basics/firstapp/starting-activity#BuildIntent
-                        val intent = Intent(activity, PlayerActivity::class.java)
-                        intent.putExtra("fileName", line)
-                        activity.runOnUiThread { activity.startActivity(intent) }
+                        Intent(activity, PlayerActivity::class.java).apply {
+                            putExtra("fileName", line)
+                            activity.runOnUiThread { activity.startActivity(this) }
+                        }
                     }
                 } catch (ignored: Throwable) {
                 }

@@ -10,6 +10,7 @@ object UiUtils {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
+    @Suppress("unused")
     // https://developer.android.com/training/system-ui/navigation#40
     fun hideNavBar(activity: Activity) {
         activity.window.decorView.apply {
