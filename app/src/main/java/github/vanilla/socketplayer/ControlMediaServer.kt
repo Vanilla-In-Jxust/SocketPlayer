@@ -3,7 +3,6 @@ package github.vanilla.socketplayer
 import android.content.Intent
 import github.vanilla.socketplayer.activities.MainActivity
 import github.vanilla.socketplayer.activities.PlayerActivity
-import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import io.ktor.network.selector.*
 import io.ktor.network.sockets.*
 import io.ktor.utils.io.*
@@ -18,7 +17,7 @@ object ControlMediaServer {
     private var serverInit: Boolean = false
 
     @DelicateCoroutinesApi
-    fun run(activity: MainActivity, binding: ActivityMainBinding) = runBlocking {
+    fun run(activity: MainActivity) = runBlocking {
         if (serverInit) return@runBlocking
 
         val server = aSocket(ActorSelectorManager(Dispatchers.IO)).tcp()

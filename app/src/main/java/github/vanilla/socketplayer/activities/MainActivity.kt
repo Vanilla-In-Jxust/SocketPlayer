@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 if (NetworkUtils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
-                Thread { ControlMediaServer.run(this@MainActivity, binding) }.start()
+                Thread { ControlMediaServer.run(this@MainActivity) }.start()
                 runOnUiThread { binding.networkInfo.text = "telnet ${address.hostAddress} 2323" }
             }
 
