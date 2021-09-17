@@ -1,14 +1,15 @@
 package github.vanilla.socketplayer.activities
 
 import android.app.Activity
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem.fromUri
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import github.vanilla.socketplayer.databinding.ActivityPlayerBinding
-import github.vanilla.socketplayer.utils.ResUtils.getUriInRaw
+import github.vanilla.socketplayer.utils.FileUtils.getFileOrThrow
 import github.vanilla.socketplayer.utils.UiUtils
 
 class PlayerActivity : Activity() {
@@ -18,7 +19,7 @@ class PlayerActivity : Activity() {
 
     private val fileName by lazy { intent.getStringExtra("fileName") }
     override fun onCreate(savedInstanceState: Bundle?) {
-        kotlin.runCatching { getUriInRaw(fileName, this) }.onFailure {
+        kotlin.runCatching { getFileOrThrow(fileName) }.onFailure {
             Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
             // https://developer.android.com/training/basics/firstapp/starting-activity#DisplayMessage
             this.finish()
@@ -46,7 +47,7 @@ class PlayerActivity : Activity() {
                     }
                 })
             }
-            .apply { setMediaItem(fromUri(getUriInRaw(fileName, this@PlayerActivity))) }
+            .apply { setMediaItem(MediaItem.fromUri(Uri.fromFile(getFileOrThrow(fileName)))) }
             .apply {
                 playWhenReady = true
                 seekTo(currentWindow, playbackPosition)

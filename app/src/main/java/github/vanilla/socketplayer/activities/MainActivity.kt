@@ -8,8 +8,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import github.vanilla.socketplayer.ControlMediaServer
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
-import github.vanilla.socketplayer.utils.UiUtils
+import github.vanilla.socketplayer.utils.FileUtils
 import github.vanilla.socketplayer.utils.NetworkUtils
+import github.vanilla.socketplayer.utils.UiUtils
 import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
 
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         UiUtils.setScreenOn(this)
+        FileUtils.grantPermission(this)
 
         // https://developer.android.com/training/basics/network-ops/reading-network-state#instantaneous
         val connectivityManager = getSystemService(ConnectivityManager::class.java)
@@ -34,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         connectivityManager.registerDefaultNetworkCallback(object :
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                val address = NetworkUtils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
+                val address =
+                    NetworkUtils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
                 if (NetworkUtils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
