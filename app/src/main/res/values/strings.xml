@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">SocketPlayer</string>
+    <string name="app_name">尼古拉播放终端</string>
     <string name="connect_wifi">Connect Wifi to enable socket.</string>
 </resources>
