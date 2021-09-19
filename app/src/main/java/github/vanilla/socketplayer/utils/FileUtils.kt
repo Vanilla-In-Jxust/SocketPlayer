@@ -11,15 +11,13 @@ import java.io.FileReader
 
 object FileUtils {
     private val sdcard: File by lazy { Environment.getExternalStorageDirectory() }
-    private const val BASE_PATH = "/Pictures/WeChat/"
 
     // https://stackoverflow.com/questions/2902689/how-can-i-read-a-text-file-from-the-sd-card-in-android
     fun getFileOrThrow(fileName: String): File {
-        val possibleFile = File(sdcard.absolutePath + BASE_PATH + fileName)
-
+        val possibleFile = File(sdcard.absolutePath + fileName)
         // Wrap it as FileReader can detect file existence.
         return kotlin.runCatching { FileReader(possibleFile); possibleFile }
-            .getOrElse { throw AssertionError("File: $fileName not found! ") }
+            .getOrElse { throw AssertionError("File: ${sdcard.absolutePath} $fileName not found! ") }
     }
 
     fun grantPermission(activity: Activity) {
