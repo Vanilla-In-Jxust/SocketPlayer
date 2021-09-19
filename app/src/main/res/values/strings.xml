@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">尼古拉播放终端</string>
     <string name="connect_wifi">Connect Wifi to enable socket.</string>
+    <string name="wifi_connection_lost">"Wifi connection lost.</string>
+    <string name="tip">Please enter the screen text on your terminal to play video file.</string>
 </resources>

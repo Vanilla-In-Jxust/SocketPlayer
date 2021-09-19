@@ -5,8 +5,10 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import github.vanilla.socketplayer.ControlMediaServer
+import github.vanilla.socketplayer.R
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.FileUtils
 import github.vanilla.socketplayer.utils.NetworkUtils
@@ -42,11 +44,16 @@ class MainActivity : AppCompatActivity() {
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity) }.start()
-                runOnUiThread { binding.networkInfo.text = "telnet ${address.hostAddress} 2323" }
+                Toast.makeText(this@MainActivity, resources.getString(R.string.tip), Toast.LENGTH_LONG).show()
+                runOnUiThread {
+                    binding.networkInfo.text = "echo [file_path] | ncat ${address.hostAddress} 2323"
+                }
             }
 
             override fun onLost(network: Network) {
-                runOnUiThread { binding.networkInfo.text = "Wifi connection lost. " }
+                runOnUiThread {
+                    binding.networkInfo.text = resources.getString(R.string.wifi_connection_lost)
+                }
             }
         })
     }
