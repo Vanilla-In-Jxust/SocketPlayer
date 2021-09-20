@@ -11,7 +11,7 @@ import java.io.FileReader
 
 object FileUtils {
     private val sdcard: File by lazy { Environment.getExternalStorageDirectory() }
-    private const val BASE_PATH = "/Pictures/WeChat/"
+    private const val BASE_PATH = "/"
 
     // https://stackoverflow.com/questions/2902689/how-can-i-read-a-text-file-from-the-sd-card-in-android
     fun getFileOrThrow(fileName: String): File {
