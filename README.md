@@ -12,7 +12,7 @@ clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect(("192.168.110.202", 2323))
 
 data = "/Pictures/WeChat/mmexport1631700069061.mp4"
-clientSocket.send(data.encode())
+clientSocket.send((data + "\r\n").encode())
 ```````
 
 ## Note
