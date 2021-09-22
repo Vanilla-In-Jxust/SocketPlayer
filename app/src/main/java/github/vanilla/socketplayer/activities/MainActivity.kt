@@ -10,6 +10,7 @@ import github.vanilla.socketplayer.ControlMediaServer
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.FileUtils
 import github.vanilla.socketplayer.utils.NetworkUtils
+import github.vanilla.socketplayer.utils.NetworkUtils.getIpAddress
 import github.vanilla.socketplayer.utils.UiUtils
 import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
@@ -36,8 +37,7 @@ class MainActivity : AppCompatActivity() {
         connectivityManager.registerDefaultNetworkCallback(object :
             ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
-                val address =
-                    NetworkUtils.getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
+                val address = getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
                 if (NetworkUtils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
