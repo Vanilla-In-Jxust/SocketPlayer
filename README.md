@@ -18,3 +18,7 @@ clientSocket.send((data + "\r\n").encode())
 ## Note
 Auto start on Android 10 needs do extra work.  
 See https://stackoverflow.com/questions/6391902/how-do-i-start-my-app-on-startup.
+
+## Bug Report
+
+ - [ ] Cannot start activity in backend (2021/09/22).
