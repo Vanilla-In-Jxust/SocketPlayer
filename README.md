@@ -21,4 +21,4 @@ See https://stackoverflow.com/questions/6391902/how-do-i-start-my-app-on-startup
 
 ## Bug Report
 
- - [ ] Cannot start activity in backend (2021/09/22).
+ - [x] Cannot start activity in backend (2021/09/22 - 2021/09/25).
