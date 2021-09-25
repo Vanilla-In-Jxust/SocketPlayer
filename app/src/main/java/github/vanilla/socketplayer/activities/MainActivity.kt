@@ -1,12 +1,15 @@
 package github.vanilla.socketplayer.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import github.vanilla.socketplayer.ControlMediaServer
+import github.vanilla.socketplayer.SocketService
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.FileUtils
 import github.vanilla.socketplayer.utils.NetworkUtils
@@ -14,6 +17,7 @@ import github.vanilla.socketplayer.utils.NetworkUtils.getIpAddress
 import github.vanilla.socketplayer.utils.UiUtils
 import io.ktor.utils.io.bits.*
 import kotlinx.coroutines.*
+
 
 @DelicateCoroutinesApi
 class MainActivity : AppCompatActivity() {
@@ -42,6 +46,11 @@ class MainActivity : AppCompatActivity() {
 
                 // https://www.kotlincn.net/docs/reference/coroutines/basics.html
                 Thread { ControlMediaServer.run(this@MainActivity) }.start()
+
+                val outerThis = this@MainActivity
+                val serviceIntent = Intent(outerThis, SocketService::class.java)
+                ContextCompat.startForegroundService(outerThis, serviceIntent)
+
                 runOnUiThread { binding.networkInfo.text = "telnet ${address.hostAddress} 2323" }
             }
 
