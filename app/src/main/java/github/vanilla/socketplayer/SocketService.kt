@@ -11,6 +11,8 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import github.vanilla.socketplayer.activities.MainActivity
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @DelicateCoroutinesApi
@@ -25,7 +27,7 @@ class SocketService : Service() {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
 
         val notificationIntent = Intent(this, MainActivity::class.java)
@@ -35,6 +37,7 @@ class SocketService : Service() {
             .setContentIntent(pendingIntent)
             .build().let { startForeground(1, it) }
 
+        Thread { GlobalScope.launch { ControlMediaServer.run(this@SocketService) } }.start()
         return START_NOT_STICKY
     }
 

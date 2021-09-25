@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import github.vanilla.socketplayer.ControlMediaServer
 import github.vanilla.socketplayer.SocketService
 import github.vanilla.socketplayer.databinding.ActivityMainBinding
 import github.vanilla.socketplayer.utils.FileUtils
@@ -51,9 +50,6 @@ class MainActivity : AppCompatActivity() {
             override fun onAvailable(network: Network) {
                 val address = getIpAddress(getSystemService(WIFI_SERVICE) as WifiManager)
                 if (NetworkUtils.isCellar(getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager)) return
-
-                // https://www.kotlincn.net/docs/reference/coroutines/basics.html
-                Thread { ControlMediaServer.run(this@MainActivity) }.start()
 
                 val outerThis = this@MainActivity
                 val serviceIntent = Intent(outerThis, SocketService::class.java)
