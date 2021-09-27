@@ -1,0 +1,25 @@
+name: Build Android App
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: build android app
+    steps:
+      - uses: actions/checkout@v2
+      - uses: sparkfabrik/android-build-action@v1.0.0
+        with:
+          project-path: .
+
+      # https://stackoverflow.com/questions/59810838/how-to-get-the-short-sha-for-the-github-workflow
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.vars.outputs.sha_short }}
+          path: ./output.apk
+
