@@ -1,7 +1,7 @@
 name: Build Android App
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -22,4 +22,3 @@ jobs:
         with:
           name: ${{ steps.vars.outputs.sha_short }}
           path: ./output.apk
-
